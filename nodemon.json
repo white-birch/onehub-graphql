@@ -1,6 +1,6 @@
 {
-  "watch": ["src", "spec.yaml"],
+  "watch": ["src"],
   "ext": "ts",
   "ignore": ["src/*/.test.ts"],
-  "exec": "ts-node ./src/index.ts"
+  "exec": "tsc && npx functions-framework --target=onehub --source=dist"
 }
