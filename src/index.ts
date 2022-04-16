@@ -1,44 +1,18 @@
-import { ApolloServer, gql } from 'apollo-server-cloud-functions';
+import { loadFilesSync } from '@graphql-tools/load-files';
+import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
+import { ApolloServer } from 'apollo-server-cloud-functions';
+import path from 'path';
+import { v4 as uuid } from 'uuid';
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-export const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+const resolversArray = loadFilesSync(path.join(__dirname, '/resolvers/**'));
+const typesArray = loadFilesSync(path.join(__dirname, '/**/*.graphql'));
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
-  }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
-  }
-`;
-
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
-export const resolvers = {
-  Query: {
-    books: () => books,
-  },
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  context: ({ req }) => ({
+    traceId: req.headers['X-ONEHUB-TRACE-ID'] || uuid(),
+  }),
+  resolvers: mergeResolvers(resolversArray),
+  typeDefs: mergeTypeDefs(typesArray),
+});
 
 exports.onehub = server.createHandler();

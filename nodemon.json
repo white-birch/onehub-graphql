@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": "ts",
+  "ext": "ts,graphql",
   "ignore": ["src/*/.test.ts"],
-  "exec": "tsc && npx functions-framework --target=onehub --source=dist"
+  "exec": "yarn build && npx functions-framework --target=onehub --source=dist"
 }

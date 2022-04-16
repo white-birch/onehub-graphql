@@ -1,0 +1,7 @@
+type Portal {
+  id: ID!
+}
+
+type Query {
+  portals: [Portal]
+}
