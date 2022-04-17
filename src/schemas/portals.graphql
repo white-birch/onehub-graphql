@@ -1,7 +1,16 @@
 type Portal {
   id: ID!
+  affiliate: Affiliate
+}
+
+input CreatePortalInput {
+  affiliate: AffiliateInput
 }
 
 type Query {
   portals: [Portal]
+}
+
+type Mutation {
+  createPortal(input: CreatePortalInput!): Portal!
 }
