@@ -5,7 +5,7 @@
     "module": "commonjs",
     "declaration": false,
     "strict": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["./node_modules/@types", "types"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noImplicitThis": true,
@@ -24,5 +24,5 @@
     "esModuleInterop": true,
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src", "types"]
 }

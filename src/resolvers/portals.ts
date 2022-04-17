@@ -1,4 +1,6 @@
-const portals = () => [{ id: 1 }, { id: 2 }];
+const portals = () => {
+  return [{ id: 1 }, { id: 2 }];
+};
 
 const Query = { portals };
 
