@@ -1,0 +1,9 @@
+input CreateUserInput {
+  email: String!
+  password: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+}

@@ -4,7 +4,7 @@ export interface CreateAffiliateInput {
 }
 
 export interface Affiliate {
-  id: number;
+  id: string;
   name: string;
   website?: string;
 }

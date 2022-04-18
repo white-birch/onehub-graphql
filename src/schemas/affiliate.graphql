@@ -4,7 +4,7 @@ type Affiliate {
   website: String
 }
 
-input AffiliateInput {
+input CreateAffiliateInput {
   name: String!
   website: String
 }

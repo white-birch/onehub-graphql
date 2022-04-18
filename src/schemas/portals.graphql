@@ -1,10 +1,12 @@
 type Portal {
   id: ID!
-  affiliate: Affiliate
+  affiliates: [Affiliate]
+  users: [User]
 }
 
 input CreatePortalInput {
-  affiliate: AffiliateInput
+  affiliate: CreateAffiliateInput!
+  user: CreateUserInput!
 }
 
 type Query {
