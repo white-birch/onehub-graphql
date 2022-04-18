@@ -1,10 +1,14 @@
+type Affiliate {
+  id: ID!
+  name: String!
+  website: String
+}
+
 input AffiliateInput {
   name: String!
   website: String
 }
 
-type Affiliate {
-  id: ID!
-  name: String!
-  website: String
+type Query {
+  affiliate: Affiliate
 }

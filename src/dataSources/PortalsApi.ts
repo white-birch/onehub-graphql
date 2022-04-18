@@ -8,6 +8,10 @@ class PortalsApi extends _OneHubApi {
   async getPortals() {
     return this.get('/portals');
   }
+
+  async getPortalAffiliates(portalId: number) {
+    return this.get(`/portals/${portalId}/affiliates`);
+  }
 }
 
 export default PortalsApi;

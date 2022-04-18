@@ -1,4 +1,4 @@
-import { CreateAffiliateInput } from './affiliates.types';
+import { Affiliate, CreateAffiliateInput } from './affiliates.types';
 
 export interface CreatePortalInput {
   affiliate: CreateAffiliateInput;
@@ -6,9 +6,5 @@ export interface CreatePortalInput {
 
 export interface Portal {
   id: number;
-  affiliate: {
-    id: number;
-    name: string;
-    website?: string;
-  };
+  affiliate: Affiliate;
 }
