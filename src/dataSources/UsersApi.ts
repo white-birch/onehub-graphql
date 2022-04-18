@@ -9,6 +9,10 @@ class UsersApi extends _OneHubApi {
   async createUser(data: CreateUserInput): Promise<User> {
     return this.post('/users', data);
   }
+
+  async signUp(data: CreateUserInput): Promise<{ token: string; user: User }> {
+    return this.post('/auth/sign-up', data);
+  }
 }
 
 export default UsersApi;

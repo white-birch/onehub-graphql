@@ -1,11 +1,11 @@
 import type { Context } from '../types';
-import type { CreatePortalInput, Portal } from './portals.types';
+import type { CreatePortalInput, CreatePortalOutput, Portal } from './portals.types';
 
-const createPortal = async (parent: undefined, { input }: { input: CreatePortalInput }, context: Context): Promise<Portal> => {
-  const [portal, affiliate, user] = await Promise.all([
+const createPortal = async (parent: undefined, { input }: { input: CreatePortalInput }, context: Context): Promise<CreatePortalOutput> => {
+  const [portal, affiliate, { token, user }] = await Promise.all([
     context.dataSources.portalsApi.createPortal(),
     context.dataSources.affiliatesApi.createAffiliate(input.affiliate),
-    context.dataSources.usersApi.createUser(input.user),
+    context.dataSources.usersApi.signUp(input.user),
   ]);
 
   await Promise.all([
@@ -13,7 +13,7 @@ const createPortal = async (parent: undefined, { input }: { input: CreatePortalI
     context.dataSources.usersApi.addUserToAffiliate(user.id, affiliate.id),
   ]);
 
-  return portal;
+  return { portal, token };
 };
 
 const portals = async (parent: undefined, args: Record<string, never>, context: Context): Promise<Portal[]> => {

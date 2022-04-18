@@ -6,6 +6,11 @@ export interface CreatePortalInput {
   user: CreateUserInput;
 }
 
+export interface CreatePortalOutput {
+  portal: Portal;
+  token: string;
+}
+
 export interface Portal {
   id: string;
   affiliates: Affiliate[];

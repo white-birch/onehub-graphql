@@ -9,10 +9,15 @@ input CreatePortalInput {
   user: CreateUserInput!
 }
 
+type CreatePortalOutput {
+  portal: Portal!
+  token: String!
+}
+
 type Query {
   portals: [Portal]
 }
 
 type Mutation {
-  createPortal(input: CreatePortalInput!): Portal!
+  createPortal(input: CreatePortalInput!): CreatePortalOutput!
 }
