@@ -15,11 +15,11 @@ class _OneHubApi extends RESTDataSource {
   }
 
   willSendRequest(request: RequestOptions) {
-    request.headers.set('X-ONEHUB-TRACE-ID', this.context.traceId);
-    request.headers.set('Content-Type', 'application/json');
+    request.headers.set('x-onehub-trace-id', this.context.traceId);
+    request.headers.set('content-type', 'application/json');
 
     if (this.context.token && !request.headers.has('Authorization')) {
-      request.headers.set('Authorization', `Bearer ${this.context.token}`);
+      request.headers.set('authorization', `Bearer ${this.context.token}`);
     }
 
     request.body = JSON.stringify(request.body);
