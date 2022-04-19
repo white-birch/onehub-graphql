@@ -1,7 +1,6 @@
 type Portal {
   id: ID!
   affiliates: [Affiliate]
-  users: [User]
 }
 
 input CreatePortalInput {

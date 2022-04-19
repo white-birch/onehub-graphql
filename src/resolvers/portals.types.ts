@@ -1,5 +1,5 @@
 import { Affiliate, CreateAffiliateInput } from './affiliates.types';
-import { CreateUserInput, User } from './users.types';
+import { CreateUserInput } from './users.types';
 
 export interface CreatePortalInput {
   affiliate: CreateAffiliateInput;
@@ -14,5 +14,4 @@ export interface CreatePortalOutput {
 export interface Portal {
   id: string;
   affiliates: Affiliate[];
-  users: User[];
 }

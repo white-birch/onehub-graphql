@@ -1,7 +1,10 @@
 import type { Context } from '../types';
+import { Affiliate } from './affiliates.types';
 
-const affiliate = async (parent: undefined, args: Record<string, never>, context: Context) => {
-  return { id: 1, name: 'foo' };
+const users = async (parent: Affiliate, args: undefined, context: Context): Promise<Affiliate['users']> => {
+  return context.dataSources.affiliatesApi.getAffiliateUsers(parent.id);
 };
 
-export default { Query: { affiliate } };
+export default {
+  Affiliate: { users },
+};

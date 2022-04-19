@@ -17,6 +17,10 @@ class AffiliatesApi extends _OneHubApi {
   async getAffiliate(): Promise<Affiliate> {
     return this.get(`/affiliates`);
   }
+
+  async getAffiliateUsers(affiliateId: string): Promise<Affiliate['users']> {
+    return this.get(`/affiliates/${affiliateId}/users`);
+  }
 }
 
 export default AffiliatesApi;

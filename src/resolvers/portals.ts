@@ -19,12 +19,8 @@ const affiliates = async (parent: Portal, args: undefined, context: Context): Pr
   return context.dataSources.portalsApi.getPortalAffiliates(parent.id);
 };
 
-const users = async (parent: Portal, args: undefined, context: Context): Promise<Portal['users']> => {
-  return context.dataSources.portalsApi.getPortalUsers(parent.id);
-};
-
 export default {
   Query: { portals },
   Mutation: { createPortal },
-  Portal: { affiliates, users },
+  Portal: { affiliates },
 };

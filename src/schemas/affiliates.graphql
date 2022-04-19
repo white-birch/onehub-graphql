@@ -2,6 +2,7 @@ type Affiliate {
   id: ID!
   name: String!
   website: String
+  users: [User]
 }
 
 input CreateAffiliateInput {

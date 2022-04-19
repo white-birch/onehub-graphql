@@ -15,10 +15,6 @@ class PortalsApi extends _OneHubApi {
   async getPortalAffiliates(portalId: string): Promise<Portal['affiliates']> {
     return this.get(`/portals/${portalId}/affiliates`);
   }
-
-  async getPortalUsers(portalId: string): Promise<Portal['users']> {
-    return this.get(`/portals/${portalId}/users`);
-  }
 }
 
 export default PortalsApi;
