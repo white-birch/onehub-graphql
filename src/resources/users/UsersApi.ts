@@ -1,5 +1,6 @@
-import { CreateUserInput, User } from 'resolvers/users.types';
-import _OneHubApi from './_OneHubApi';
+import _OneHubApi from '../../utils/_OneHubApi';
+
+import type { CreateUserInput, User } from './users.types';
 
 class UsersApi extends _OneHubApi {
   async addUserToAffiliate(userId: string, affiliateId: string): Promise<void> {

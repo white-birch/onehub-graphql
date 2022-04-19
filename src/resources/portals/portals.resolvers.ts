@@ -1,4 +1,4 @@
-import type { Context } from '../types';
+import type { Context } from '../../context.types';
 import type { CreatePortalInput, CreatePortalOutput, Portal } from './portals.types';
 
 const createPortal = async (parent: undefined, { input }: { input: CreatePortalInput }, context: Context): Promise<CreatePortalOutput> => {

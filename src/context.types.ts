@@ -1,6 +1,6 @@
-import AffiliatesApi from '../dataSources/AffiliatesApi';
-import PortalsApi from '../dataSources/PortalsApi';
-import UsersApi from '../dataSources/UsersApi';
+import AffiliatesApi from './resources/affiliates/AffiliatesApi';
+import PortalsApi from './resources/portals/PortalsApi';
+import UsersApi from './resources/users/UsersApi';
 
 export interface Context {
   token: string;

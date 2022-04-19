@@ -1,4 +1,4 @@
-import { User } from './users.types';
+import type { User } from '../users/users.types';
 
 export interface CreateAffiliateInput {
   name: string;

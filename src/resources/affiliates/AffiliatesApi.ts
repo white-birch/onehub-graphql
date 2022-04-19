@@ -1,7 +1,7 @@
-import _OneHubApi from './_OneHubApi';
+import _OneHubApi from '../../utils/_OneHubApi';
 
 import type { RequestInit } from 'apollo-server-env';
-import type { Affiliate, CreateAffiliateInput } from 'resolvers/affiliates.types';
+import type { Affiliate, CreateAffiliateInput } from './affiliates.types';
 
 class AffiliatesApi extends _OneHubApi {
   async addAffiliateToPortal(affiliateId: string, portalId: string): Promise<void> {

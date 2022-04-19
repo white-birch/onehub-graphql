@@ -1,6 +1,6 @@
-import AffiliatesApi from './AffiliatesApi';
-import PortalsApi from './PortalsApi';
-import UsersApi from './UsersApi';
+import AffiliatesApi from './resources/affiliates/AffiliatesApi';
+import PortalsApi from './resources/portals/PortalsApi';
+import UsersApi from './resources/users/UsersApi';
 
 const getDataSources = () => {
   return {

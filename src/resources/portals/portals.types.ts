@@ -1,5 +1,5 @@
-import { Affiliate, CreateAffiliateInput } from './affiliates.types';
-import { CreateUserInput } from './users.types';
+import type { Affiliate, CreateAffiliateInput } from '../affiliates/affiliates.types';
+import type { CreateUserInput } from '../users/users.types';
 
 export interface CreatePortalInput {
   affiliate: CreateAffiliateInput;
