@@ -1,9 +1,11 @@
-import { Portal } from 'resolvers/portals.types';
 import _OneHubApi from './_OneHubApi';
 
+import type { RequestInit } from 'apollo-server-env';
+import type { Portal } from 'resolvers/portals.types';
+
 class PortalsApi extends _OneHubApi {
-  async createPortal(): Promise<Portal> {
-    return this.post('/portals');
+  async createPortal(options?: RequestInit): Promise<Portal> {
+    return this.post('/portals', undefined, options);
   }
 
   async getPortals(): Promise<Portal[]> {
