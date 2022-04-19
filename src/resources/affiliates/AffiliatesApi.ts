@@ -28,13 +28,7 @@ class AffiliatesApi extends _OneHubApi {
   }
 
   async getAffiliateUsers(affiliateId: string): Promise<Affiliate['users']> {
-    const users = (await this.get(`/affiliates/${affiliateId}/users`)) as AffinityUser[];
-
-    return users.map((user) => ({
-      id: user.id,
-      email: user.email,
-      roles: user.roles.map(({ role }) => role),
-    }));
+    return this.get(`/affiliates/${affiliateId}/users`);
   }
 }
 
