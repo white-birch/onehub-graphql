@@ -11,16 +11,11 @@ const createPortal = async (parent: undefined, { input }: { input: CreatePortalI
   return { portal, token };
 };
 
-const portals = async (parent: undefined, args: Record<string, never>, context: Context): Promise<Portal[]> => {
-  return context.dataSources.portalsApi.getPortals();
-};
-
 const affiliates = async (parent: Portal, args: undefined, context: Context): Promise<Portal['affiliates']> => {
   return context.dataSources.portalsApi.getPortalAffiliates(parent.id);
 };
 
 export default {
-  Query: { portals },
   Mutation: { createPortal },
   Portal: { affiliates },
 };

@@ -1,16 +1,7 @@
 import _OneHubApi from '../../utils/_OneHubApi';
 
 import type { RequestInit } from 'apollo-server-env';
-import type { Role } from 'types';
 import type { Affiliate, CreateAffiliateInput } from './affiliates.types';
-
-interface AffinityUser {
-  id: string;
-  email: string;
-  roles: {
-    role: Role;
-  }[];
-}
 
 class AffiliatesApi extends _OneHubApi {
   async addAffiliateToPortal(affiliateId: string, portalId: string): Promise<void> {
@@ -21,10 +12,6 @@ class AffiliatesApi extends _OneHubApi {
     const params = new URLSearchParams({ portalId });
     const path = `/affiliates?${params}`;
     return this.post(path, data, options);
-  }
-
-  async getAffiliate(): Promise<Affiliate> {
-    return this.get(`/affiliates`);
   }
 
   async getAffiliateUsers(affiliateId: string): Promise<Affiliate['users']> {
