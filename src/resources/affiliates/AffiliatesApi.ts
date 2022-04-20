@@ -4,10 +4,6 @@ import type { RequestInit } from 'apollo-server-env';
 import type { Affiliate, CreateAffiliateInput } from './affiliates.types';
 
 class AffiliatesApi extends _OneHubApi {
-  async addAffiliateToPortal(affiliateId: string, portalId: string): Promise<void> {
-    return this.put(`/affiliates/${affiliateId}/portal/${portalId}`);
-  }
-
   async createAffiliate(data: CreateAffiliateInput, portalId: string, options?: RequestInit): Promise<Affiliate> {
     const params = new URLSearchParams({ portalId });
     const path = `/affiliates?${params}`;
