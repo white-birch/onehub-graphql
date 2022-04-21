@@ -1,7 +1,11 @@
-enum Role {
+enum AffiliateRole {
   ADMIN
   EMPLOYEE
   MEMBER
+}
+
+enum PortalRole {
+  ADMIN
 }
 
 input CreateUserInput {
@@ -12,5 +16,6 @@ input CreateUserInput {
 type User {
   id: ID!
   email: String!
-  roles: [Role]!
+  affiliateUserRoles: [AffiliateRole]!
+  portalUserRoles: [PortalRole]!
 }

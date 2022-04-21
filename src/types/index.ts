@@ -1,4 +1,4 @@
-export enum Role {
+export enum AffiliateRole {
   Admin = 'ADMIN',
   Employee = 'EMPLOYEE',
   Member = 'MEMBER',

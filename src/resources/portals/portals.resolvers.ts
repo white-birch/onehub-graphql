@@ -6,7 +6,7 @@ const createPortal = async (parent: undefined, { input }: { input: CreatePortalI
   context.token = token;
 
   const portal = await context.dataSources.portalsApi.createPortal();
-  await context.dataSources.affiliatesApi.createAffiliate(input.affiliate, portal.id);
+  await context.dataSources.affiliatesApi.createAffiliate({ ...input.affiliate, portalId: portal.id });
 
   return { portal, token };
 };
