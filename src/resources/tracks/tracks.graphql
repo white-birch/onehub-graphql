@@ -1,0 +1,14 @@
+type Track {
+  affiliateId: ID!
+  id: ID!
+  name: String!
+}
+
+input CreateTrackInput {
+  affiliateId: ID!
+  name: String!
+}
+
+type Mutation {
+  createTrack(input: CreateTrackInput!): Track!
+}

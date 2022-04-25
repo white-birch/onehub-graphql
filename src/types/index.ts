@@ -3,3 +3,7 @@ export enum AffiliateRole {
   Employee = 'EMPLOYEE',
   Member = 'MEMBER',
 }
+
+export enum PortalRole {
+  admin = 'ADMIN',
+}

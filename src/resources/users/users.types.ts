@@ -1,4 +1,4 @@
-import type { AffiliateRole } from 'types';
+import type { AffiliateRole, PortalRole } from 'types';
 
 export interface CreateUserInput {
   email: string;
@@ -9,4 +9,5 @@ export interface User {
   id: string;
   email: string;
   affiliateUserRoles: AffiliateRole[];
+  portalUserRoles: PortalRole[];
 }
