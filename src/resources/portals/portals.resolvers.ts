@@ -1,5 +1,5 @@
-import type { Context } from '../../context.types';
-import type { CreatePortalInput, CreatePortalOutput, Portal } from './portals.types';
+import type { Context } from 'types/context';
+import type { CreatePortalInput, CreatePortalOutput, Portal } from 'types/graphql';
 
 const createPortal = async (parent: undefined, { input }: { input: CreatePortalInput }, context: Context): Promise<CreatePortalOutput> => {
   const { token } = await context.dataSources.usersApi.signUp(input.user);

@@ -1,7 +1,7 @@
 import _OneHubApi from '../../utils/_OneHubApi';
 
 import type { RequestInit } from 'apollo-server-env';
-import type { Affiliate, CreateAffiliateInput } from './affiliates.types';
+import type { Affiliate, CreateAffiliateInput } from 'types/graphql';
 
 class AffiliatesApi extends _OneHubApi {
   async createAffiliate(data: CreateAffiliateInput & { portalId: string }, options?: RequestInit): Promise<Affiliate> {

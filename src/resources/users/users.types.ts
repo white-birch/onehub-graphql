@@ -1,4 +1,4 @@
-import type { AffiliateRole, PortalRole } from 'types';
+import type { AffiliateRole, PortalRole } from 'types/graphql';
 
 export interface CreateUserInput {
   email: string;

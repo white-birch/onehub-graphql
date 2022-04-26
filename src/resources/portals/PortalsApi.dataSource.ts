@@ -1,7 +1,7 @@
 import _OneHubApi from '../../utils/_OneHubApi';
 
 import type { RequestInit } from 'apollo-server-env';
-import type { Portal } from './portals.types';
+import type { Portal } from 'types/graphql';
 
 class PortalsApi extends _OneHubApi {
   async createPortal(options?: RequestInit): Promise<Portal> {

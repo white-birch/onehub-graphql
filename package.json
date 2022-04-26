@@ -13,7 +13,8 @@
     "dev": "dotenv nodemon",
     "lint": "eslint .",
     "start": "npx functions-framework --target=onehub --source=dist",
-    "test": "jest"
+    "test": "jest",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@graphql-tools/load-files": "^6.5.3",
@@ -27,6 +28,9 @@
   },
   "devDependencies": {
     "@google-cloud/functions-framework": "^3.1.0",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-resolvers": "2.6.1",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.179",
     "@types/node": "^17.0.21",

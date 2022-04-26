@@ -1,5 +1,4 @@
-import type { Affiliate, CreateAffiliateInput } from '../affiliates/affiliates.types';
-import type { CreateUserInput } from '../users/users.types';
+import type { Affiliate, CreateAffiliateInput, CreateUserInput } from 'types/graphql';
 
 export interface CreatePortalInput {
   affiliate: CreateAffiliateInput;
