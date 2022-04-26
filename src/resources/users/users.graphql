@@ -19,3 +19,7 @@ type User {
   affiliateUserRoles: [AffiliateRole]!
   portalUserRoles: [PortalRole]!
 }
+
+type Mutation {
+  signIn(email: String!, password: String!): String!
+}
