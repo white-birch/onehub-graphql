@@ -11,6 +11,7 @@ const typesArray = loadFilesSync(path.join(__dirname, '/**/*.graphql'));
 const server = new ApolloServer({
   context,
   dataSources,
+  debug: false,
   resolvers: mergeResolvers(resolversArray),
   typeDefs: mergeTypeDefs(typesArray),
 });
