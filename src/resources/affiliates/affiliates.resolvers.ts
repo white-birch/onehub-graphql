@@ -1,4 +1,4 @@
-import type { Context } from 'types/context';
+import type { Context } from 'server/context';
 import type { Affiliate } from 'types/graphql';
 
 const users = async (parent: Affiliate, args: undefined, context: Context): Promise<Affiliate['users']> => {

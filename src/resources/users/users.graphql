@@ -13,6 +13,10 @@ input CreateUserInput {
   password: String!
 }
 
+type Me {
+  userId: ID!
+}
+
 type User {
   id: ID!
   email: String!
@@ -22,4 +26,8 @@ type User {
 
 type Mutation {
   signIn(email: String!, password: String!): String!
+}
+
+type Query {
+  me: Me!
 }

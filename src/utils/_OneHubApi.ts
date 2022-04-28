@@ -2,6 +2,7 @@ import { Response, RESTDataSource } from 'apollo-datasource-rest';
 import { isObject } from 'lodash';
 import { BadRequestError, InternalServerError, NotFoundError, UnauthorizedError } from '../errors';
 import logger from './logger';
+import { getToken } from './token';
 
 import type { RequestOptions } from 'apollo-datasource-rest';
 
@@ -21,8 +22,9 @@ class _OneHubApi extends RESTDataSource {
     request.headers.set('x-onehub-trace-id', this.context.traceId);
     request.headers.set('content-type', 'application/json');
 
-    if (this.context.token && !request.headers.has('Authorization')) {
-      request.headers.set('authorization', `Bearer ${this.context.token}`);
+    const token = getToken(this.context);
+    if (token && !request.headers.has('Authorization')) {
+      request.headers.set('authorization', `Bearer ${token}`);
     }
 
     request.body = JSON.stringify(request.body);

@@ -1,7 +1,8 @@
 import { Config } from 'apollo-server-cloud-functions';
-import { ExpressContext } from 'apollo-server-express';
 import { get } from 'lodash';
 import logger from '../utils/logger';
+
+import type { ExpressContext } from 'apollo-server-express';
 
 const formatResponse: Config<ExpressContext>['formatResponse'] = (response) => {
   if (!response.errors) return response;

@@ -1,4 +1,4 @@
-import type { Context } from 'types/context';
+import type { Context } from 'server/context';
 import type { CreateTrackInput, Track } from 'types/graphql';
 
 const createTrack = async (parent: undefined, { input }: { input: CreateTrackInput }, context: Context): Promise<Track> => {
