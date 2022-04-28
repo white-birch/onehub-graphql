@@ -18,6 +18,10 @@ type Me {
   userId: ID!
 }
 
+type SignInOutput {
+  token: String!
+}
+
 type User {
   id: ID!
   email: String!
@@ -26,7 +30,7 @@ type User {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!): Me!
+  signIn(email: String!, password: String!): SignInOutput!
   signOut: Boolean!
 }
 
