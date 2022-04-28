@@ -1,7 +1,9 @@
 import Cryptr from 'cryptr';
+import jwt from 'jsonwebtoken';
+import logger from './logger';
 
 import type { Context } from 'server/context';
-import logger from './logger';
+import { JwtPayload } from 'jsonwebtoken';
 
 const { TOKEN_SECRET } = process.env;
 
@@ -9,7 +11,16 @@ if (!TOKEN_SECRET) {
   throw new Error('Missing environment variable: TOKEN_SECRET');
 }
 
+const COOKIE_OPTIONS = Object.freeze({ httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
 const cryptr = new Cryptr(TOKEN_SECRET);
+
+export const decode = (token: string | undefined): JwtPayload | undefined => (token ? (jwt.decode(token) as JwtPayload) : undefined);
+
+export const deleteToken = (context: Context) => {
+  context.token = undefined;
+  context.res.clearCookie('token', COOKIE_OPTIONS);
+};
 
 export const getToken = (context: Context) => {
   try {
@@ -25,5 +36,5 @@ export const getToken = (context: Context) => {
 
 export const setToken = (token: string, context: Context) => {
   context.token = token;
-  context.res.cookie('token', cryptr.encrypt(token), { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+  context.res.cookie('token', cryptr.encrypt(token), COOKIE_OPTIONS);
 };

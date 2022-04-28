@@ -3,6 +3,7 @@ import { setToken } from '../../utils/token';
 import type { Context } from 'server/context';
 import type { CreatePortalInput, CreatePortalOutput, Portal } from 'types/graphql';
 
+// TODO: This should be moved to users.resolvers.ts as a "sign up" operation
 const createPortal = async (parent: undefined, { input }: { input: CreatePortalInput }, context: Context): Promise<CreatePortalOutput> => {
   const { token } = await context.dataSources.usersApi.signUp(input.user);
   setToken(token, context);
