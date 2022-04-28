@@ -25,5 +25,5 @@ export const getToken = (context: Context) => {
 
 export const setToken = (token: string, context: Context) => {
   context.token = token;
-  context.res.cookie('token', cryptr.encrypt(token), { httpOnly: true });
+  context.res.cookie('token', cryptr.encrypt(token), { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 };
