@@ -3,20 +3,6 @@ type Portal {
   affiliates: [Affiliate]
 }
 
-input CreatePortalInput {
-  affiliate: CreateAffiliateInput!
-  user: CreateUserInput!
-}
-
-type CreatePortalOutput {
-  portal: Portal!
-  token: String!
-}
-
 type Query {
   portals: [Portal]
-}
-
-type Mutation {
-  createPortal(input: CreatePortalInput!): CreatePortalOutput!
 }

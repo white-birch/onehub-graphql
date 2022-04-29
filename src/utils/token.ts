@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import logger from './logger';
 
 import type { Context } from 'server/context';
-import { JwtPayload } from 'jsonwebtoken';
 
 const { TOKEN_SECRET } = process.env;
 
@@ -15,7 +14,7 @@ const COOKIE_OPTIONS = Object.freeze({ httpOnly: true, secure: process.env.NODE_
 
 const cryptr = new Cryptr(TOKEN_SECRET);
 
-export const decode = (token: string | undefined): JwtPayload | undefined => (token ? (jwt.decode(token) as JwtPayload) : undefined);
+export const decode = <T>(token: string): T => jwt.decode(token) as T;
 
 export const deleteToken = (context: Context) => {
   context.token = undefined;

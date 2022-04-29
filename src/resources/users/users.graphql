@@ -13,12 +13,16 @@ input CreateUserInput {
   password: String!
 }
 
+input SignUpOptions {
+  createPortal: Boolean = false
+}
+
 type Me {
   token: String!
   userId: ID!
 }
 
-type SignInOutput {
+type TokenOutput {
   token: String!
 }
 
@@ -30,8 +34,9 @@ type User {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!): SignInOutput!
+  signIn(email: String!, password: String!): TokenOutput!
   signOut: Boolean!
+  signUp(email: String!, password: String!, options: SignUpOptions = {}): TokenOutput!
 }
 
 type Query {

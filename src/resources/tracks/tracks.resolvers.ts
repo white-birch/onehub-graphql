@@ -1,7 +1,7 @@
 import type { Context } from 'server/context';
-import type { CreateTrackInput, Track } from 'types/graphql';
+import type { MutationResolvers } from 'types/graphql';
 
-const createTrack = async (parent: undefined, { input }: { input: CreateTrackInput }, context: Context): Promise<Track> => {
+const createTrack: MutationResolvers<Context>['createTrack'] = async (parent, { input }, context) => {
   return context.dataSources.tracksApi.createTrack(input);
 };
 

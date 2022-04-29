@@ -1,7 +1,7 @@
 import type { Context } from 'server/context';
-import type { Affiliate } from 'types/graphql';
+import type { AffiliateResolvers } from 'types/graphql';
 
-const users = async (parent: Affiliate, args: undefined, context: Context): Promise<Affiliate['users']> => {
+const users: AffiliateResolvers<Context>['users'] = async (parent, args, context) => {
   return context.dataSources.affiliatesApi.getAffiliateUsers(parent.id);
 };
 
