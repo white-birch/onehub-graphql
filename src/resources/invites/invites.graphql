@@ -1,0 +1,10 @@
+enum InviteType {
+  PORTAL
+  AFFILIATE
+}
+
+type Invite {
+  code: String!
+  type: InviteType!
+  id: ID!
+}

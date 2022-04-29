@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import AffiliatesApi from '../resources/affiliates/AffiliatesApi.dataSource';
+import InvitesApi from 'resources/invites/InvitesApi.dataSource';
 import PortalsApi from '../resources/portals/PortalsApi.dataSource';
 import TracksApi from '../resources/tracks/TracksApi.dataSource';
 import UsersApi from '../resources/users/UsersApi.dataSource';
@@ -15,6 +16,7 @@ export interface Context {
   traceId: string;
   dataSources: {
     affiliatesApi: AffiliatesApi;
+    invitesApi: InvitesApi;
     portalsApi: PortalsApi;
     tracksApi: TracksApi;
     usersApi: UsersApi;

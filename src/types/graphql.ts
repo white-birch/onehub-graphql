@@ -43,6 +43,18 @@ export type CreateUserInput = {
   password: Scalars['String'];
 };
 
+export type Invite = {
+  __typename?: 'Invite';
+  code: Scalars['String'];
+  id: Scalars['ID'];
+  type: InviteType;
+};
+
+export enum InviteType {
+  Affiliate = 'AFFILIATE',
+  Portal = 'PORTAL'
+}
+
 export type Me = {
   __typename?: 'Me';
   token: Scalars['String'];
@@ -94,6 +106,7 @@ export type Query = {
 
 export type SignUpOptions = {
   createPortal?: InputMaybe<Scalars['Boolean']>;
+  inviteCode?: InputMaybe<Scalars['String']>;
 };
 
 export type TokenOutput = {
@@ -193,6 +206,8 @@ export type ResolversTypes = ResolversObject<{
   CreateTrackInput: CreateTrackInput;
   CreateUserInput: CreateUserInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Invite: ResolverTypeWrapper<Invite>;
+  InviteType: InviteType;
   Me: ResolverTypeWrapper<Me>;
   Mutation: ResolverTypeWrapper<{}>;
   Portal: ResolverTypeWrapper<Portal>;
@@ -213,6 +228,7 @@ export type ResolversParentTypes = ResolversObject<{
   CreateTrackInput: CreateTrackInput;
   CreateUserInput: CreateUserInput;
   ID: Scalars['ID'];
+  Invite: Invite;
   Me: Me;
   Mutation: {};
   Portal: Portal;
@@ -229,6 +245,13 @@ export type AffiliateResolvers<ContextType = any, ParentType extends ResolversPa
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type InviteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Invite'] = ResolversParentTypes['Invite']> = ResolversObject<{
+  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['InviteType'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -279,6 +302,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Affiliate?: AffiliateResolvers<ContextType>;
+  Invite?: InviteResolvers<ContextType>;
   Me?: MeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Portal?: PortalResolvers<ContextType>;
