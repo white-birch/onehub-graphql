@@ -25,7 +25,7 @@ export type Affiliate = {
 export enum AffiliateRole {
   Admin = 'ADMIN',
   Employee = 'EMPLOYEE',
-  Member = 'MEMBER'
+  Member = 'MEMBER',
 }
 
 export type CreateAffiliateInput = {
@@ -52,7 +52,7 @@ export type Invite = {
 
 export enum InviteType {
   Affiliate = 'AFFILIATE',
-  Portal = 'PORTAL'
+  Organization = 'ORGANIZATION',
 }
 
 export type Me = {
@@ -69,17 +69,14 @@ export type Mutation = {
   signUp: TokenOutput;
 };
 
-
 export type MutationCreateTrackArgs = {
   input: CreateTrackInput;
 };
-
 
 export type MutationSignInArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
-
 
 export type MutationSignUpArgs = {
   email: Scalars['String'];
@@ -87,25 +84,25 @@ export type MutationSignUpArgs = {
   password: Scalars['String'];
 };
 
-export type Portal = {
-  __typename?: 'Portal';
+export type Organization = {
+  __typename?: 'Organization';
   affiliates?: Maybe<Array<Maybe<Affiliate>>>;
   id: Scalars['ID'];
 };
 
-export enum PortalRole {
-  Admin = 'ADMIN'
+export enum OrganizationRole {
+  Admin = 'ADMIN',
 }
 
 export type Query = {
   __typename?: 'Query';
   affiliate?: Maybe<Affiliate>;
   me?: Maybe<Me>;
-  portals?: Maybe<Array<Maybe<Portal>>>;
+  organizations?: Maybe<Array<Maybe<Organization>>>;
 };
 
 export type SignUpOptions = {
-  createPortal?: InputMaybe<Scalars['Boolean']>;
+  createOrganization?: InputMaybe<Scalars['Boolean']>;
   inviteCode?: InputMaybe<Scalars['String']>;
 };
 
@@ -126,7 +123,7 @@ export type User = {
   affiliateUserRoles: Array<Maybe<AffiliateRole>>;
   email: Scalars['String'];
   id: Scalars['ID'];
-  portalUserRoles: Array<Maybe<PortalRole>>;
+  organizationUserRoles: Array<Maybe<OrganizationRole>>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -134,11 +131,12 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+  | ResolverFn<TResult, TParent, TContext, TArgs>
+  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -210,8 +208,8 @@ export type ResolversTypes = ResolversObject<{
   InviteType: InviteType;
   Me: ResolverTypeWrapper<Me>;
   Mutation: ResolverTypeWrapper<{}>;
-  Portal: ResolverTypeWrapper<Portal>;
-  PortalRole: PortalRole;
+  Organization: ResolverTypeWrapper<Organization>;
+  OrganizationRole: OrganizationRole;
   Query: ResolverTypeWrapper<{}>;
   SignUpOptions: SignUpOptions;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -231,7 +229,7 @@ export type ResolversParentTypes = ResolversObject<{
   Invite: Invite;
   Me: Me;
   Mutation: {};
-  Portal: Portal;
+  Organization: Organization;
   Query: {};
   SignUpOptions: SignUpOptions;
   String: Scalars['String'];
@@ -268,7 +266,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   signUp?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
 }>;
 
-export type PortalResolvers<ContextType = any, ParentType extends ResolversParentTypes['Portal'] = ResolversParentTypes['Portal']> = ResolversObject<{
+export type OrganizationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']
+> = ResolversObject<{
   affiliates?: Resolver<Maybe<Array<Maybe<ResolversTypes['Affiliate']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -277,10 +278,13 @@ export type PortalResolvers<ContextType = any, ParentType extends ResolversParen
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   affiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
-  portals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Portal']>>>, ParentType, ContextType>;
+  organizations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Organization']>>>, ParentType, ContextType>;
 }>;
 
-export type TokenOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOutput'] = ResolversParentTypes['TokenOutput']> = ResolversObject<{
+export type TokenOutputResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['TokenOutput'] = ResolversParentTypes['TokenOutput']
+> = ResolversObject<{
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -296,7 +300,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   affiliateUserRoles?: Resolver<Array<Maybe<ResolversTypes['AffiliateRole']>>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  portalUserRoles?: Resolver<Array<Maybe<ResolversTypes['PortalRole']>>, ParentType, ContextType>;
+  organizationUserRoles?: Resolver<Array<Maybe<ResolversTypes['OrganizationRole']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -305,10 +309,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Invite?: InviteResolvers<ContextType>;
   Me?: MeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
-  Portal?: PortalResolvers<ContextType>;
+  Organization?: OrganizationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   TokenOutput?: TokenOutputResolvers<ContextType>;
   Track?: TrackResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
-

@@ -4,7 +4,7 @@ import type { RequestInit } from 'apollo-server-env';
 import type { Affiliate, CreateAffiliateInput, User } from 'types/graphql';
 
 class AffiliatesApi extends _OneHubApi {
-  async createAffiliate(data: CreateAffiliateInput & { portalId: string }, options?: RequestInit): Promise<Affiliate> {
+  async createAffiliate(data: CreateAffiliateInput & { organizationId: string }, options?: RequestInit): Promise<Affiliate> {
     return this.post('/affiliates', data, options);
   }
 

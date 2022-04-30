@@ -18,23 +18,23 @@ const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, pas
   const { token } = await context.dataSources.usersApi.signUp(email, password);
   setToken(token, context);
 
-  if (options.createPortal) {
-    await context.dataSources.portalsApi.createPortal();
+  if (options.createOrganization) {
+    await context.dataSources.organizationsApi.createOrganization();
   }
 
   if (options.inviteCode) {
     // ! Maybe this should be an "all-in-one" operation on the /invites api... an operation to "accept" an invite and get added to whatever the user needs to get added to...
 
-    // TODO: convert invite code to portal/affiliate
+    // TODO: convert invite code to organization/affiliate
     const invite = await context.dataSources.invitesApi.getInvite(options.inviteCode);
 
-    // TODO: if invite.code === 'PORTAL'
-    // ? Associate user to portal.
-    // ? Associate user to all portal affiliates (with a member role).
+    // TODO: if invite.code === 'ORGANIZATION'
+    // ? Associate user to organization.
+    // ? Associate user to all organization affiliates (with a member role).
 
     // TODO: if invite.code === 'AFFILIATE'
     // ? Associate user to affiliate (with member role).
-    // ? Associate user to affiliate's portal.
+    // ? Associate user to affiliate's organization.
   }
 
   return { token };

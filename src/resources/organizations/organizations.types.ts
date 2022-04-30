@@ -1,16 +1,16 @@
 import type { Affiliate, CreateAffiliateInput, CreateUserInput } from 'types/graphql';
 
-export interface CreatePortalInput {
+export interface CreateOrganizationInput {
   affiliate: CreateAffiliateInput;
   user: CreateUserInput;
 }
 
-export interface CreatePortalOutput {
-  portal: Portal;
+export interface CreateOrganizationOutput {
+  organization: Organization;
   token: string;
 }
 
-export interface Portal {
+export interface Organization {
   id: string;
   affiliates: Affiliate[];
 }

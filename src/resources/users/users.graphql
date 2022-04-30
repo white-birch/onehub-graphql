@@ -4,7 +4,7 @@ enum AffiliateRole {
   MEMBER
 }
 
-enum PortalRole {
+enum OrganizationRole {
   ADMIN
 }
 
@@ -15,7 +15,7 @@ input CreateUserInput {
 
 input SignUpOptions {
   inviteCode: String
-  createPortal: Boolean = false
+  createOrganization: Boolean = false
 }
 
 type Me {
@@ -31,7 +31,7 @@ type User {
   id: ID!
   email: String!
   affiliateUserRoles: [AffiliateRole]!
-  portalUserRoles: [PortalRole]!
+  organizationUserRoles: [OrganizationRole]!
 }
 
 type Mutation {

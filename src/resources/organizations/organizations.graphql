@@ -1,8 +1,8 @@
-type Portal {
+type Organization {
   id: ID!
   affiliates: [Affiliate]
 }
 
 type Query {
-  portals: [Portal]
+  organizations: [Organization]
 }

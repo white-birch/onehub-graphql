@@ -1,4 +1,4 @@
-import type { AffiliateRole, PortalRole } from 'types/graphql';
+import type { AffiliateRole, OrganizationRole } from 'types/graphql';
 
 export interface CreateUserInput {
   email: string;
@@ -9,5 +9,5 @@ export interface User {
   id: string;
   email: string;
   affiliateUserRoles: AffiliateRole[];
-  portalUserRoles: PortalRole[];
+  organizationUserRoles: OrganizationRole[];
 }
