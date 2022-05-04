@@ -1,8 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import AffiliatesApi from '../resources/affiliates/AffiliatesApi.dataSource';
 import InvitesApi from 'resources/invites/InvitesApi.dataSource';
 import OrganizationsApi from '../resources/organizations/OrganizationsApi.dataSource';
-import TracksApi from '../resources/tracks/TracksApi.dataSource';
 import UsersApi from '../resources/users/UsersApi.dataSource';
 import { getToken } from '../utils/token';
 
@@ -15,10 +13,8 @@ export interface Context {
   token?: string;
   traceId: string;
   dataSources: {
-    affiliatesApi: AffiliatesApi;
     invitesApi: InvitesApi;
     organizationsApi: OrganizationsApi;
-    tracksApi: TracksApi;
     usersApi: UsersApi;
   };
 }
