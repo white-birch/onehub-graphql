@@ -15,6 +15,10 @@ const signOut: MutationResolvers<Context>['signOut'] = (parent, args, context) =
 };
 
 const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, password, options }, context) => {
+  if (options.inviteCode) {
+    await context.dataSources.invitesApi.getInvite(options.inviteCode);
+  }
+
   const { token } = await context.dataSources.usersApi.signUp(email, password);
   setToken(token, context);
 
