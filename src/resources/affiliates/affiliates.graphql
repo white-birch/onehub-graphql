@@ -1,0 +1,9 @@
+type Affiliate {
+  id: ID!
+  name: String!
+  website: String
+}
+
+type Query {
+  affiliates(organizationId: ID!): [Affiliate]
+}

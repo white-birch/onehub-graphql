@@ -18,25 +18,14 @@ export type Affiliate = {
   __typename?: 'Affiliate';
   id: Scalars['ID'];
   name: Scalars['String'];
-  users?: Maybe<Array<Maybe<User>>>;
   website?: Maybe<Scalars['String']>;
 };
 
 export enum AffiliateRole {
   Admin = 'ADMIN',
   Employee = 'EMPLOYEE',
-  Member = 'MEMBER',
+  Member = 'MEMBER'
 }
-
-export type CreateAffiliateInput = {
-  name: Scalars['String'];
-  website?: InputMaybe<Scalars['String']>;
-};
-
-export type CreateTrackInput = {
-  affiliateId: Scalars['ID'];
-  name: Scalars['String'];
-};
 
 export type CreateUserInput = {
   email: Scalars['String'];
@@ -52,7 +41,7 @@ export type Invite = {
 
 export enum InviteType {
   Affiliate = 'AFFILIATE',
-  Organization = 'ORGANIZATION',
+  Organization = 'ORGANIZATION'
 }
 
 export type Me = {
@@ -63,20 +52,17 @@ export type Me = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createTrack: Track;
   signIn: TokenOutput;
   signOut: Scalars['Boolean'];
   signUp: TokenOutput;
 };
 
-export type MutationCreateTrackArgs = {
-  input: CreateTrackInput;
-};
 
 export type MutationSignInArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
+
 
 export type MutationSignUpArgs = {
   email: Scalars['String'];
@@ -91,14 +77,18 @@ export type Organization = {
 };
 
 export enum OrganizationRole {
-  Admin = 'ADMIN',
+  Admin = 'ADMIN'
 }
 
 export type Query = {
   __typename?: 'Query';
-  affiliate?: Maybe<Affiliate>;
+  affiliates?: Maybe<Array<Maybe<Affiliate>>>;
   me?: Maybe<Me>;
-  organizations?: Maybe<Array<Maybe<Organization>>>;
+};
+
+
+export type QueryAffiliatesArgs = {
+  organizationId: Scalars['ID'];
 };
 
 export type SignUpOptions = {
@@ -109,13 +99,6 @@ export type SignUpOptions = {
 export type TokenOutput = {
   __typename?: 'TokenOutput';
   token: Scalars['String'];
-};
-
-export type Track = {
-  __typename?: 'Track';
-  affiliateId: Scalars['ID'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
 };
 
 export type User = {
@@ -131,12 +114,11 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
+
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-  | ResolverFn<TResult, TParent, TContext, TArgs>
-  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -200,8 +182,6 @@ export type ResolversTypes = ResolversObject<{
   Affiliate: ResolverTypeWrapper<Affiliate>;
   AffiliateRole: AffiliateRole;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  CreateAffiliateInput: CreateAffiliateInput;
-  CreateTrackInput: CreateTrackInput;
   CreateUserInput: CreateUserInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Invite: ResolverTypeWrapper<Invite>;
@@ -214,7 +194,6 @@ export type ResolversTypes = ResolversObject<{
   SignUpOptions: SignUpOptions;
   String: ResolverTypeWrapper<Scalars['String']>;
   TokenOutput: ResolverTypeWrapper<TokenOutput>;
-  Track: ResolverTypeWrapper<Track>;
   User: ResolverTypeWrapper<User>;
 }>;
 
@@ -222,8 +201,6 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Affiliate: Affiliate;
   Boolean: Scalars['Boolean'];
-  CreateAffiliateInput: CreateAffiliateInput;
-  CreateTrackInput: CreateTrackInput;
   CreateUserInput: CreateUserInput;
   ID: Scalars['ID'];
   Invite: Invite;
@@ -234,14 +211,12 @@ export type ResolversParentTypes = ResolversObject<{
   SignUpOptions: SignUpOptions;
   String: Scalars['String'];
   TokenOutput: TokenOutput;
-  Track: Track;
   User: User;
 }>;
 
 export type AffiliateResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliate'] = ResolversParentTypes['Affiliate']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -260,39 +235,24 @@ export type MeResolvers<ContextType = any, ParentType extends ResolversParentTyp
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createTrack?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationCreateTrackArgs, 'input'>>;
   signIn?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   signUp?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
 }>;
 
-export type OrganizationResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']
-> = ResolversObject<{
+export type OrganizationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = ResolversObject<{
   affiliates?: Resolver<Maybe<Array<Maybe<ResolversTypes['Affiliate']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  affiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType>;
+  affiliates?: Resolver<Maybe<Array<Maybe<ResolversTypes['Affiliate']>>>, ParentType, ContextType, RequireFields<QueryAffiliatesArgs, 'organizationId'>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
-  organizations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Organization']>>>, ParentType, ContextType>;
 }>;
 
-export type TokenOutputResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['TokenOutput'] = ResolversParentTypes['TokenOutput']
-> = ResolversObject<{
+export type TokenOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOutput'] = ResolversParentTypes['TokenOutput']> = ResolversObject<{
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = ResolversObject<{
-  affiliateId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -312,6 +272,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Organization?: OrganizationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   TokenOutput?: TokenOutputResolvers<ContextType>;
-  Track?: TrackResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
+
