@@ -1,8 +1,0 @@
-type Organization {
-  id: ID!
-  affiliates: [Affiliate]
-}
-
-type Query {
-  organizations: [Organization]
-}
