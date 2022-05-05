@@ -36,7 +36,7 @@ type User {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!): TokenOutput!
+  signIn(email: String!, password: String!, organizationId: ID!): TokenOutput!
   signOut: Boolean!
   signUp(email: String!, password: String!, options: SignUpOptions = {}): TokenOutput!
 }

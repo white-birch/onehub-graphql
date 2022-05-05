@@ -61,6 +61,7 @@ export type Mutation = {
 
 export type MutationSignInArgs = {
   email: Scalars['String'];
+  organizationId: Scalars['ID'];
   password: Scalars['String'];
 };
 
@@ -237,7 +238,7 @@ export type MeResolvers<ContextType = any, ParentType extends ResolversParentTyp
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  signIn?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'password'>>;
+  signIn?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   signUp?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
 }>;

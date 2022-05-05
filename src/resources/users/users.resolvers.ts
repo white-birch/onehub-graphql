@@ -3,8 +3,8 @@ import { decode, deleteToken, getToken, setToken } from '../../utils/token';
 import type { Context } from 'server/context';
 import type { Me, MutationResolvers, QueryResolvers } from 'types/graphql';
 
-const signIn: MutationResolvers<Context>['signIn'] = async (parent, { email, password }, context) => {
-  const { token } = await context.dataSources.usersApi.signIn(email, password);
+const signIn: MutationResolvers<Context>['signIn'] = async (parent, { email, password, organizationId }, context) => {
+  const { token } = await context.dataSources.usersApi.signIn(email, password, organizationId);
   setToken(token, context);
   return { token };
 };
@@ -19,16 +19,16 @@ const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, pas
     await context.dataSources.invitesApi.getInvite(options.inviteCode);
   }
 
-  const { token } = await context.dataSources.usersApi.signUp(email, password);
-  setToken(token, context);
+  await context.dataSources.usersApi.signUp(email, password);
 
-  if (options.createOrganization) {
-    await context.dataSources.organizationsApi.createOrganization();
-  }
+  const organization = options.createOrganization ? await context.dataSources.organizationsApi.createOrganization() : undefined;
 
   if (options.inviteCode) {
     await context.dataSources.invitesApi.acceptInvite(options.inviteCode);
   }
+
+  const { token } = await context.dataSources.usersApi.signIn(email, password, organization?.id);
+  setToken(token, context);
 
   return { token };
 };
