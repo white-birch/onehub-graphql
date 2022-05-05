@@ -46,6 +46,7 @@ export enum InviteType {
 
 export type Me = {
   __typename?: 'Me';
+  isOrganizationAdmin: Scalars['Boolean'];
   token: Scalars['String'];
   userId: Scalars['ID'];
 };
@@ -229,6 +230,7 @@ export type InviteResolvers<ContextType = any, ParentType extends ResolversParen
 }>;
 
 export type MeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Me'] = ResolversParentTypes['Me']> = ResolversObject<{
+  isOrganizationAdmin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

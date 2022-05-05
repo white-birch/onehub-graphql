@@ -21,6 +21,7 @@ input SignUpOptions {
 type Me {
   token: String!
   userId: ID!
+  isOrganizationAdmin: Boolean!
 }
 
 type TokenOutput {

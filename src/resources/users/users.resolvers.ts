@@ -1,7 +1,7 @@
 import { decode, deleteToken, getToken, setToken } from '../../utils/token';
 
 import type { Context } from 'server/context';
-import type { MutationResolvers, QueryResolvers } from 'types/graphql';
+import type { Me, MutationResolvers, QueryResolvers } from 'types/graphql';
 
 const signIn: MutationResolvers<Context>['signIn'] = async (parent, { email, password }, context) => {
   const { token } = await context.dataSources.usersApi.signIn(email, password);
@@ -37,7 +37,7 @@ const me: QueryResolvers<Context>['me'] = (parent, args, context) => {
   const token = getToken(context);
   if (!token) return null;
 
-  const payload = decode<{ userId: string }>(token);
+  const payload = decode<Omit<Me, 'token'>>(token);
   return { token, ...payload };
 };
 
