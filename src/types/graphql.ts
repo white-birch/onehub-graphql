@@ -27,6 +27,12 @@ export enum AffiliateRole {
   Member = 'MEMBER'
 }
 
+export type CreateAffiliateInput = {
+  name: Scalars['String'];
+  organizationId: Scalars['ID'];
+  website?: InputMaybe<Scalars['String']>;
+};
+
 export type CreateUserInput = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -53,9 +59,15 @@ export type Me = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAffiliate?: Maybe<Affiliate>;
   signIn: TokenOutput;
   signOut: Scalars['Boolean'];
   signUp: TokenOutput;
+};
+
+
+export type MutationCreateAffiliateArgs = {
+  input: CreateAffiliateInput;
 };
 
 
@@ -184,6 +196,7 @@ export type ResolversTypes = ResolversObject<{
   Affiliate: ResolverTypeWrapper<Affiliate>;
   AffiliateRole: AffiliateRole;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  CreateAffiliateInput: CreateAffiliateInput;
   CreateUserInput: CreateUserInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Invite: ResolverTypeWrapper<Invite>;
@@ -203,6 +216,7 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Affiliate: Affiliate;
   Boolean: Scalars['Boolean'];
+  CreateAffiliateInput: CreateAffiliateInput;
   CreateUserInput: CreateUserInput;
   ID: Scalars['ID'];
   Invite: Invite;
@@ -238,6 +252,7 @@ export type MeResolvers<ContextType = any, ParentType extends ResolversParentTyp
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createAffiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType, RequireFields<MutationCreateAffiliateArgs, 'input'>>;
   signIn?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   signUp?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;

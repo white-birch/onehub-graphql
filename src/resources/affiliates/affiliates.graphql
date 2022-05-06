@@ -4,6 +4,16 @@ type Affiliate {
   website: String
 }
 
+input CreateAffiliateInput {
+  organizationId: ID!
+  name: String!
+  website: String
+}
+
+type Mutation {
+  createAffiliate(input: CreateAffiliateInput!): Affiliate
+}
+
 type Query {
   affiliates(organizationId: ID!): [Affiliate]
 }
