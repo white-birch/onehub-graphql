@@ -60,9 +60,9 @@ export type Me = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAffiliate?: Maybe<Affiliate>;
-  signIn: TokenOutput;
+  signIn: Scalars['Boolean'];
   signOut: Scalars['Boolean'];
-  signUp: TokenOutput;
+  signUp: Scalars['Boolean'];
 };
 
 
@@ -253,9 +253,9 @@ export type MeResolvers<ContextType = any, ParentType extends ResolversParentTyp
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAffiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType, RequireFields<MutationCreateAffiliateArgs, 'input'>>;
-  signIn?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
+  signIn?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  signUp?: Resolver<ResolversTypes['TokenOutput'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
+  signUp?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
 }>;
 
 export type OrganizationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = ResolversObject<{

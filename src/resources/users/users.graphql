@@ -36,9 +36,9 @@ type User {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!, organizationId: ID!): TokenOutput!
+  signIn(email: String!, password: String!, organizationId: ID!): Boolean!
   signOut: Boolean!
-  signUp(email: String!, password: String!, options: SignUpOptions = {}): TokenOutput!
+  signUp(email: String!, password: String!, options: SignUpOptions = {}): Boolean!
 }
 
 type Query {

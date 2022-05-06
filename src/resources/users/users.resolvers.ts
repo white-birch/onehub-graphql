@@ -1,12 +1,12 @@
-import { decode, deleteToken, getToken, setToken } from '../../utils/token';
+import { deleteToken, getToken, setToken } from '../../utils/token';
 
 import type { Context } from 'server/context';
-import type { Me, MutationResolvers, QueryResolvers } from 'types/graphql';
+import type { MutationResolvers, QueryResolvers } from 'types/graphql';
 
 const signIn: MutationResolvers<Context>['signIn'] = async (parent, { email, password, organizationId }, context) => {
   const { token } = await context.dataSources.usersApi.signIn(email, password, organizationId);
   setToken(token, context);
-  return { token };
+  return true;
 };
 
 const signOut: MutationResolvers<Context>['signOut'] = (parent, args, context) => {
@@ -19,7 +19,8 @@ const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, pas
     await context.dataSources.invitesApi.getInvite(options.inviteCode);
   }
 
-  await context.dataSources.usersApi.signUp(email, password);
+  const signUpRes = await context.dataSources.usersApi.signUp(email, password);
+  setToken(signUpRes.token, context);
 
   const organization = options.createOrganization ? await context.dataSources.organizationsApi.createOrganization() : undefined;
 
@@ -27,10 +28,11 @@ const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, pas
     await context.dataSources.invitesApi.acceptInvite(options.inviteCode);
   }
 
-  const { token } = await context.dataSources.usersApi.signIn(email, password, organization?.id);
-  setToken(token, context);
+  // Need to retrieve token from "sign in" endpoint again because it will now include the organization id
+  const signInRes = await context.dataSources.usersApi.signIn(email, password, organization?.id);
+  setToken(signInRes.token, context);
 
-  return { token };
+  return true;
 };
 
 const me: QueryResolvers<Context>['me'] = async (parent, args, context) => {
