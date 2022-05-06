@@ -33,12 +33,16 @@ const signUp: MutationResolvers<Context>['signUp'] = async (parent, { email, pas
   return { token };
 };
 
-const me: QueryResolvers<Context>['me'] = (parent, args, context) => {
-  const token = getToken(context);
-  if (!token) return null;
+const me: QueryResolvers<Context>['me'] = async (parent, args, context) => {
+  try {
+    const token = getToken(context);
+    if (!token) return null;
 
-  const payload = decode<Omit<Me, 'token'>>(token);
-  return { token, ...payload };
+    return await context.dataSources.usersApi.me();
+  } catch (error) {
+    deleteToken(context);
+    throw error;
+  }
 };
 
 export default {
