@@ -109,8 +109,14 @@ export enum OrganizationRole {
 
 export type Query = {
   __typename?: 'Query';
+  affiliate?: Maybe<Affiliate>;
   affiliates?: Maybe<Array<Maybe<Affiliate>>>;
   me?: Maybe<Me>;
+};
+
+
+export type QueryAffiliateArgs = {
+  affiliateId: Scalars['ID'];
 };
 
 
@@ -287,6 +293,7 @@ export type OrganizationResolvers<ContextType = any, ParentType extends Resolver
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  affiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType, RequireFields<QueryAffiliateArgs, 'affiliateId'>>;
   affiliates?: Resolver<Maybe<Array<Maybe<ResolversTypes['Affiliate']>>>, ParentType, ContextType, RequireFields<QueryAffiliatesArgs, 'organizationId'>>;
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
 }>;

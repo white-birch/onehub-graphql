@@ -11,6 +11,10 @@ class AffiliatesApi extends _OneHubApi {
     return this.delete(`/affiliates/${affiliateId}`);
   }
 
+  async getAffiliate(affiliateId: string): Promise<Affiliate> {
+    return this.get(`/affiliates/${affiliateId}`);
+  }
+
   async getAffiliates(organizationId: string): Promise<Affiliate[]> {
     return this.get('/affiliates', { organizationId });
   }

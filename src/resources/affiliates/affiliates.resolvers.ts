@@ -1,6 +1,10 @@
 import type { Context } from 'server/context';
 import type { MutationResolvers, QueryResolvers } from 'types/graphql';
 
+const affiliate: QueryResolvers<Context>['affiliate'] = (parent, { affiliateId }, context) => {
+  return context.dataSources.affiliatesApi.getAffiliate(affiliateId);
+};
+
 const affiliates: QueryResolvers<Context>['affiliates'] = (parent, { organizationId }, context) => {
   return context.dataSources.affiliatesApi.getAffiliates(organizationId);
 };
@@ -20,5 +24,5 @@ const updateAffiliate: MutationResolvers<Context>['updateAffiliate'] = async (pa
 
 export default {
   Mutation: { createAffiliate, deleteAffiliate, updateAffiliate },
-  Query: { affiliates },
+  Query: { affiliate, affiliates },
 };
