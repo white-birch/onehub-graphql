@@ -1,6 +1,6 @@
 import _OneHubApi from '../../utils/_OneHubApi';
 
-import type { Affiliate, CreateAffiliateInput } from 'types/graphql';
+import type { Affiliate, CreateAffiliateInput, UpdateAffiliateInput } from 'types/graphql';
 
 class AffiliatesApi extends _OneHubApi {
   async createAffiliate(input: CreateAffiliateInput) {
@@ -13,6 +13,10 @@ class AffiliatesApi extends _OneHubApi {
 
   async getAffiliates(organizationId: string): Promise<Affiliate[]> {
     return this.get('/affiliates', { organizationId });
+  }
+
+  async updateAffiliate(affiliateId: string, input: UpdateAffiliateInput) {
+    return this.put(`/affiliates/${affiliateId}`, input);
   }
 }
 

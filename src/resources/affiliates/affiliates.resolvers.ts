@@ -14,7 +14,11 @@ const deleteAffiliate: MutationResolvers<Context>['deleteAffiliate'] = async (pa
   return true;
 };
 
+const updateAffiliate: MutationResolvers<Context>['updateAffiliate'] = async (parent, { affiliateId, input }, context) => {
+  return context.dataSources.affiliatesApi.updateAffiliate(affiliateId, input);
+};
+
 export default {
-  Mutation: { createAffiliate, deleteAffiliate },
+  Mutation: { createAffiliate, deleteAffiliate, updateAffiliate },
   Query: { affiliates },
 };

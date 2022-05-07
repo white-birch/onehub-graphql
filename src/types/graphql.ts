@@ -64,6 +64,7 @@ export type Mutation = {
   signIn: Scalars['Boolean'];
   signOut: Scalars['Boolean'];
   signUp: Scalars['Boolean'];
+  updateAffiliate?: Maybe<Affiliate>;
 };
 
 
@@ -88,6 +89,12 @@ export type MutationSignUpArgs = {
   email: Scalars['String'];
   options?: InputMaybe<SignUpOptions>;
   password: Scalars['String'];
+};
+
+
+export type MutationUpdateAffiliateArgs = {
+  affiliateId: Scalars['ID'];
+  input: UpdateAffiliateInput;
 };
 
 export type Organization = {
@@ -119,6 +126,11 @@ export type SignUpOptions = {
 export type TokenOutput = {
   __typename?: 'TokenOutput';
   token: Scalars['String'];
+};
+
+export type UpdateAffiliateInput = {
+  name: Scalars['String'];
+  website?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
@@ -215,6 +227,7 @@ export type ResolversTypes = ResolversObject<{
   SignUpOptions: SignUpOptions;
   String: ResolverTypeWrapper<Scalars['String']>;
   TokenOutput: ResolverTypeWrapper<TokenOutput>;
+  UpdateAffiliateInput: UpdateAffiliateInput;
   User: ResolverTypeWrapper<User>;
 }>;
 
@@ -233,6 +246,7 @@ export type ResolversParentTypes = ResolversObject<{
   SignUpOptions: SignUpOptions;
   String: Scalars['String'];
   TokenOutput: TokenOutput;
+  UpdateAffiliateInput: UpdateAffiliateInput;
   User: User;
 }>;
 
@@ -263,6 +277,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   signIn?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   signUp?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;
+  updateAffiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType, RequireFields<MutationUpdateAffiliateArgs, 'affiliateId' | 'input'>>;
 }>;
 
 export type OrganizationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = ResolversObject<{

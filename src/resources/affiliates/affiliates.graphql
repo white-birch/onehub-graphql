@@ -10,9 +10,15 @@ input CreateAffiliateInput {
   website: String
 }
 
+input UpdateAffiliateInput {
+  name: String!
+  website: String
+}
+
 type Mutation {
   createAffiliate(input: CreateAffiliateInput!): Affiliate
   deleteAffiliate(affiliateId: ID!): Boolean
+  updateAffiliate(affiliateId: ID!, input: UpdateAffiliateInput!): Affiliate
 }
 
 type Query {
