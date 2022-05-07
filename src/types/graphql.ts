@@ -60,6 +60,7 @@ export type Me = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAffiliate?: Maybe<Affiliate>;
+  deleteAffiliate?: Maybe<Scalars['Boolean']>;
   signIn: Scalars['Boolean'];
   signOut: Scalars['Boolean'];
   signUp: Scalars['Boolean'];
@@ -68,6 +69,11 @@ export type Mutation = {
 
 export type MutationCreateAffiliateArgs = {
   input: CreateAffiliateInput;
+};
+
+
+export type MutationDeleteAffiliateArgs = {
+  affiliateId: Scalars['ID'];
 };
 
 
@@ -253,6 +259,7 @@ export type MeResolvers<ContextType = any, ParentType extends ResolversParentTyp
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAffiliate?: Resolver<Maybe<ResolversTypes['Affiliate']>, ParentType, ContextType, RequireFields<MutationCreateAffiliateArgs, 'input'>>;
+  deleteAffiliate?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeleteAffiliateArgs, 'affiliateId'>>;
   signIn?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'organizationId' | 'password'>>;
   signOut?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   signUp?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'options' | 'password'>>;

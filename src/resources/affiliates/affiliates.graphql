@@ -12,6 +12,7 @@ input CreateAffiliateInput {
 
 type Mutation {
   createAffiliate(input: CreateAffiliateInput!): Affiliate
+  deleteAffiliate(affiliateId: ID!): Boolean
 }
 
 type Query {
